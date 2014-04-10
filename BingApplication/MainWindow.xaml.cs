@@ -32,9 +32,16 @@ namespace BingApplication
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            loadImg();
-            textLoad.Visibility = System.Windows.Visibility.Collapsed;
+            try
+            {
+                loadImg();
+            }
+            catch (Exception ee)
+            {
+                
+                MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+           
             img.Visibility = System.Windows.Visibility.Visible;
         }
 

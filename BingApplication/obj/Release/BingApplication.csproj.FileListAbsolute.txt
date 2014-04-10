@@ -1,0 +1,11 @@
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\bin\Release\BingApplication.exe
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\bin\Release\BingApplication.pdb
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\MainWindow.baml
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\MainWindow.g.cs
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\App.g.cs
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication_MarkupCompile.cache
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.g.resources
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.Properties.Resources.resources
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.csproj.GenerateResource.Cache
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.exe
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.pdb
