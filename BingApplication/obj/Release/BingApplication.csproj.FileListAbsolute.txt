@@ -9,3 +9,5 @@ f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Rel
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.csproj.GenerateResource.Cache
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.exe
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.pdb
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.csprojResolveAssemblyReference.cache
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.AboutBox1.resources

@@ -70,6 +70,7 @@ namespace BingApplication
             //如果是HTTP下载文件
             this.imgUrl = imgUrl;
             this.imgName = str.Substring(str.LastIndexOf("/"));
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -83,6 +84,35 @@ namespace BingApplication
             string path = dir + imgName;
             wc.DownloadFile(new Uri(imgUrl, UriKind.Absolute), path);
             MessageBox.Show("下载成功,文件地址为："+path, "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /**
+         * 退出应用程序
+         * */
+        private void menuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void menuItemSetup_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemAbout_Click(object sender, RoutedEventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.ShowDialog();
+        }
+
+        private void hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(img.Source.ToString());
         }
     }
 }
