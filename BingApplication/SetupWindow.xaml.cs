@@ -28,6 +28,16 @@ namespace BingApplication
 
         private void selectPath_Click(object sender, RoutedEventArgs e)
         {
+            selectPathOpera();
+        }
+
+        private void textPath_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            selectPathOpera();
+        }
+
+        private void selectPathOpera()
+        {
             FolderBrowserDialog folderDialog = new FolderBrowserDialog();
             if (folderDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -36,7 +46,7 @@ namespace BingApplication
 
                 Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 cfa.AppSettings.Settings[STORGE_PATH].Value = path;
-                
+
                 cfa.Save();
             }
         }
