@@ -11,3 +11,6 @@ f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Rel
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.pdb
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.csprojResolveAssemblyReference.cache
 f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\BingApplication.AboutBox1.resources
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\bin\Release\BingApplication.exe.config
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\SetupWindow.baml
+f:\documents\visual studio 2013\Projects\BingApplication\BingApplication\obj\Release\SetupWindow.g.cs

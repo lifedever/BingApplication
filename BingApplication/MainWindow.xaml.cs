@@ -15,7 +15,7 @@ using System.Xml;
 using System.Net;
 using System.IO;
 using System.Threading;
-
+using System.Configuration;
 namespace BingApplication
 {
     /// <summary>
@@ -35,14 +35,27 @@ namespace BingApplication
             try
             {
                 loadImg();
+                img.Visibility = System.Windows.Visibility.Visible;
+                loadConfig();
             }
             catch (Exception ee)
             {
-                
                 MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
-            img.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        /**
+         * 创建配置文件
+         * */
+        private void loadConfig()
+        {
+            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (config.AppSettings.Settings[SetupWindow.STORGE_PATH] == null || string.IsNullOrEmpty(config.AppSettings.Settings[SetupWindow.STORGE_PATH].Value))
+            {
+                config.AppSettings.Settings.Add(SetupWindow.STORGE_PATH, AppDomain.CurrentDomain.BaseDirectory);
+                config.Save();
+            }
         }
 
         private void getImg_Click(object sender, RoutedEventArgs e)
@@ -75,11 +88,13 @@ namespace BingApplication
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
             WebClient wc = new WebClient();
-            string dir = AppDomain.CurrentDomain.BaseDirectory + "bing";
+            string dir = cfg.AppSettings.Settings[SetupWindow.STORGE_PATH].Value + "/bing";
             if (!Directory.Exists(dir))
             {
-                new DirectoryInfo(dir).Create();
+                new DirectoryInfo(@dir).Create();
             }
             string path = dir + imgName;
             wc.DownloadFile(new Uri(imgUrl, UriKind.Absolute), path);
@@ -101,7 +116,8 @@ namespace BingApplication
 
         private void menuItemSetup_Click(object sender, RoutedEventArgs e)
         {
-
+            SetupWindow setupWin = new SetupWindow();
+            setupWin.ShowDialog();
         }
 
         private void menuItemAbout_Click(object sender, RoutedEventArgs e)
