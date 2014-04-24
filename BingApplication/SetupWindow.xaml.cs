@@ -21,6 +21,7 @@ namespace BingApplication
     public partial class SetupWindow : Window
     {
         public const string STORGE_PATH = "storgePath";
+        public const string AUTO_WALLPAPER = "autoWallPaper";
         public SetupWindow()
         {
             InitializeComponent();
@@ -45,10 +46,24 @@ namespace BingApplication
                 textPath.Text = path;
 
                 Configuration cfa = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                cfa.AppSettings.Settings[STORGE_PATH].Value = path;
-
+                cfa.AppSettings.Settings[STORGE_PATH].Value = path + "\\";
                 cfa.Save();
             }
+        }
+
+        private void chkWall_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration cfg = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            if (cfg.AppSettings.Settings[AUTO_WALLPAPER] == null || string.IsNullOrEmpty(cfg.AppSettings.Settings[AUTO_WALLPAPER].Value))
+            {
+                cfg.AppSettings.Settings.Add(AUTO_WALLPAPER, chkWall.IsChecked.ToString());
+                
+            }
+            else
+            {
+                cfg.AppSettings.Settings[AUTO_WALLPAPER].Value = chkWall.IsChecked.ToString();
+            }
+            cfg.Save();
         }
     }
 }
