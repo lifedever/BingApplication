@@ -53,12 +53,14 @@ namespace BingApplication
             {
                 string path = folderDialog.SelectedPath;
                 textPath.Text = path;
-                ConfigUtils.setStorgePath(path);                
+                //ConfigUtils.setStorgePath(path);                
             }
         }
 
-        private void chkWall_Click(object sender, RoutedEventArgs e)
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            ConfigUtils.setStorgePath(textPath.Text);
             ConfigUtils.setAutoWallPaper(chkWall.IsChecked.ToString());
         }
     }

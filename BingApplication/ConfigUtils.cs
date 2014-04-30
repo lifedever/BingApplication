@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace BingApplication
 {
@@ -37,6 +38,11 @@ namespace BingApplication
         public static void setStorgePath(string path)
         {
             path = path.EndsWith("/") || path.EndsWith("\\") ? path : path + "/";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
             KeyValueConfigurationElement element = ConfigUtils.getStorgePath();
             Configuration config = getConfig();
@@ -80,6 +86,11 @@ namespace BingApplication
             string dir = AppDomain.CurrentDomain.BaseDirectory;
             dir = dir.EndsWith("/") || dir.EndsWith("\\") ? dir + "bing/" : dir + "/bing/";
             setStorgePath(dir);
+
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
         }
 
 

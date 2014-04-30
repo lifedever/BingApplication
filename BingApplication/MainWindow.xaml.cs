@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading;
 using System.Configuration;
 using System.Windows.Threading;
+using System.Security.Principal;
 namespace BingApplication
 {
     /// <summary>
@@ -24,31 +25,40 @@ namespace BingApplication
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string imgUrl;
-        private string imgName;
-        private bool isSet = true;
-
         private DispatcherTimer timer = null;
 
-        public static string path;
-        public string dir;
         public MainWindow()
         {
             InitializeComponent();
+            // 当程序没有以管理员权限启动时
+            if (!IsAdmin())
+            {
+                SendMessage(this.Handle, 0x160C, 0, 0xFFFFFFFF); //　向按钮发送消息使之加上 UAC 盾牌标志
+            }
         }
+
+        /// <summary>
+      /// 判断当前是否具有管理员权限
+        /// </summary>
+       private bool IsAdmin()
+       {
+          return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
+                loadConfig();
                 loadImg();
                 img.Visibility = System.Windows.Visibility.Visible;
-                loadConfig();
                 initializeTimer();
             }
             catch (Exception ee)
             {
-                MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ee.ToString());
+                //MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
         }
@@ -59,9 +69,14 @@ namespace BingApplication
         private void initializeTimer()
         {
             timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 5);
+            timer.Interval = new TimeSpan(0, 0, 10);
             timer.Tick += new EventHandler(timer_tick);
             timer.Start();
+        }
+
+        private string getImageFullPath()
+        {
+            return ConfigUtils.getStorgePath().Value + DateTime.Today.ToLongDateString() + ".jpg";
         }
 
         /// <summary>
@@ -71,21 +86,12 @@ namespace BingApplication
         /// <param name="e"></param>
         private void timer_tick(object sender, EventArgs e)
         {
-            dir = ConfigUtils.getStorgePath().Value;
-            path = @dir + DateTime.Today.ToLongDateString() + ".jpg";
-
-            if (!File.Exists(path))
+            if (!File.Exists(getImageFullPath()))
             {
                 downloadImage();
-                if (isSet)
-                {
-                    setWallpaper();
-                }
             }
-            else if(isSet)
-            {
-                setWallpaper();
-            }
+            setWallpaper();
+           
         }
 
         /// <summary>
@@ -98,14 +104,13 @@ namespace BingApplication
                 KeyValueConfigurationElement autoWallpaper = ConfigUtils.getAutoWallPaper();
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
-                    WallpaperUtils.setWallpaper(path);
+                    WallpaperUtils.setWallpaper(getImageFullPath());
                     message.Text = DateTime.Today.ToLongDateString() + " 的壁纸设置成功！";
                     //isSet = false;
                 }
             }
             catch (Exception ee)
             {
-
                 MessageBox.Show(ee.ToString());
             }
             
@@ -125,27 +130,32 @@ namespace BingApplication
             
 
         }
-        private void loadImg()
+
+        private string getImageUrl()
         {
             XmlDocument doc = new XmlDocument();
             doc.Load("http://cn.bing.com/HPImageArchive.aspx?idx=0&n=1");
             XmlNodeList lis = doc.GetElementsByTagName("url");
             String str = lis[0].InnerText;
             string imgUrl = "http://cn.bing.com" + str;
-           
+            return imgUrl;
+        }
 
-            BitmapImage myBitmapImage = new BitmapImage();
-            // BitmapImage.UriSource must be in a BeginInit/EndInit block
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri(imgUrl, UriKind.Absolute);
-            myBitmapImage.DecodePixelWidth = 2048;
-            myBitmapImage.EndInit();
-            img.Source = myBitmapImage;
-
-            //如果是HTTP下载文件
-            this.imgUrl = imgUrl;
-            this.imgName = str.Substring(str.LastIndexOf("/"));
-
+        private void loadImg()
+        {
+            if (!File.Exists(getImageFullPath()))
+            {
+                BitmapImage myBitmapImage = new BitmapImage();
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri(getImageUrl(), UriKind.Absolute);
+                myBitmapImage.DecodePixelWidth = 2048;
+                myBitmapImage.EndInit();
+                img.Source = myBitmapImage;
+            }
+            else
+            {
+                img.Source = new BitmapImage(new Uri(getImageFullPath(), UriKind.RelativeOrAbsolute));
+            }
         }
 
 
@@ -155,13 +165,7 @@ namespace BingApplication
         private void downloadImage()
         {
             WebClient wc = new WebClient();
-            if (!Directory.Exists(dir))
-            {
-                new DirectoryInfo(@dir).Create();
-            }
-            wc.DownloadFile(new Uri(imgUrl, UriKind.Absolute), path);
-            //MessageBox.Show("下载成功,文件地址为：" + path, "提示", MessageBoxButton.OK, MessageBoxImage.Information);
-            isSet = true;
+            wc.DownloadFile(new Uri(getImageUrl(), UriKind.Absolute), getImageFullPath());
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -194,9 +198,5 @@ namespace BingApplication
             System.Diagnostics.Process.Start(img.Source.ToString());
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BingApplication.SetupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="设置" Height="260" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" >
+        Title="设置" Height="260" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Closing="Window_Closing" >
     <Grid>
         <StackPanel>
             <GroupBox Header="基本设置" HorizontalAlignment="Left" VerticalAlignment="Top" Height="165" Width="320" Margin="10,10,0,0">
@@ -15,10 +15,10 @@
                         <Button Name="selectPath" Click="selectPath_Click">选择路径</Button>
                     </InlineUIContainer>
                     <LineBreak/>
-                    <CheckBox Margin="0 10" Name="chkWall" Click="chkWall_Click">自动将今天的壁纸设置成桌面背景</CheckBox>
+                    <CheckBox Margin="0 10" Name="chkWall">自动将今天的壁纸设置成桌面背景</CheckBox>
                 </TextBlock>
             </GroupBox>
-            <TextBlock Margin="10">提示:壁纸默认保存在设置路径的bing目录下</TextBlock>
+            <TextBlock Margin="10">提示:壁纸默认保存在程序所在路径的bing目录</TextBlock>
         </StackPanel>
     </Grid>
 </Window>
