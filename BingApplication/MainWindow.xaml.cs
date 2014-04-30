@@ -39,7 +39,7 @@ namespace BingApplication
         {
             this.notifyIcon = new NotifyIcon();
             this.notifyIcon.Text = "每日Bing壁纸获取程序";
-            this.notifyIcon.Icon = new System.Drawing.Icon("../../1140395.ico");
+            this.notifyIcon.Icon = new System.Drawing.Icon("app.ico");
             this.notifyIcon.Visible = true;
 
             //打开菜单项
