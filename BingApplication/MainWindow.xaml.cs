@@ -17,7 +17,6 @@ using System.IO;
 using System.Threading;
 using System.Configuration;
 using System.Windows.Threading;
-using System.Security.Principal;
 namespace BingApplication
 {
     /// <summary>
@@ -30,21 +29,7 @@ namespace BingApplication
         public MainWindow()
         {
             InitializeComponent();
-            // 当程序没有以管理员权限启动时
-            if (!IsAdmin())
-            {
-                SendMessage(this.Handle, 0x160C, 0, 0xFFFFFFFF); //　向按钮发送消息使之加上 UAC 盾牌标志
-            }
         }
-
-        /// <summary>
-      /// 判断当前是否具有管理员权限
-        /// </summary>
-       private bool IsAdmin()
-       {
-          return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
-        }
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -105,8 +90,6 @@ namespace BingApplication
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
                     WallpaperUtils.setWallpaper(getImageFullPath());
-                    message.Text = DateTime.Today.ToLongDateString() + " 的壁纸设置成功！";
-                    //isSet = false;
                 }
             }
             catch (Exception ee)
