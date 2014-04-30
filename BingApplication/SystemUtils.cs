@@ -24,7 +24,7 @@ namespace BingApplication
             RegistryKey reg = Registry.LocalMachine;
             RegistryKey run = reg.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
             //在Run键中写入一个新的键值  
-            run.SetValue(REG_KEY, appName);
+            run.SetValue(REG_KEY, "\"" + appName + "\"");
             reg.Close();
         }
 
