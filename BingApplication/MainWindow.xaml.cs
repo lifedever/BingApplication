@@ -181,5 +181,10 @@ namespace BingApplication
             System.Diagnostics.Process.Start(img.Source.ToString());
         }
 
+        private void menuItemOpenImage_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"explorer.exe", System.IO.Path.GetFullPath(ConfigUtils.getStorgePath().Value));
+        }
+
     }
 }
