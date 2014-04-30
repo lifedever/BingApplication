@@ -153,7 +153,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 12);
             this.label1.TabIndex = 26;
-            this.label1.Text = "版本:v0.0.3";
+            this.label1.Text = "版本:v0.1.0";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // AboutBox1
