@@ -17,6 +17,7 @@ using System.IO;
 using System.Threading;
 using System.Configuration;
 using System.Windows.Threading;
+using System.Windows.Forms;
 namespace BingApplication
 {
     /// <summary>
@@ -25,10 +26,49 @@ namespace BingApplication
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer = null;
+        private NotifyIcon notifyIcon;
 
         public MainWindow()
         {
+            
             InitializeComponent();
+            InitNotify();
+        }
+
+        private void InitNotify()
+        {
+            this.notifyIcon = new NotifyIcon();
+            this.notifyIcon.Text = "每日Bing壁纸获取程序";
+            this.notifyIcon.Icon = new System.Drawing.Icon("../../1140395.ico");
+            this.notifyIcon.Visible = true;
+
+            //打开菜单项
+            System.Windows.Forms.MenuItem open = new System.Windows.Forms.MenuItem("打开");
+            open.Click += new EventHandler((o, e) =>
+            {
+                this.Show();
+            });
+
+            //退出菜单项
+            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
+            exit.Click += new EventHandler((o , e) =>
+            {
+                System.Windows.Application.Current.Shutdown();
+            });
+
+            //关联托盘控件
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { open, exit };
+            notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
+            
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler((o, e) =>
+            {
+                if (e.Button == MouseButtons.Left) 
+                {
+                    this.Show();
+                };
+            });
+
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -42,7 +82,7 @@ namespace BingApplication
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                System.Windows.MessageBox.Show(ee.ToString());
                 //MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
@@ -90,11 +130,12 @@ namespace BingApplication
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
                     WallpaperUtils.setWallpaper(getImageFullPath());
+                    notifyTip("提示", "已自动切换为新的壁纸！", 3000);
                 }
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.ToString());
+                System.Windows.MessageBox.Show(ee.ToString());
             }
             
             
@@ -149,6 +190,7 @@ namespace BingApplication
         {
             WebClient wc = new WebClient();
             wc.DownloadFile(new Uri(getImageUrl(), UriKind.Absolute), getImageFullPath());
+            notifyTip("提示", "壁纸已下载并保存在"+getImageFullPath(), 2000);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -161,7 +203,7 @@ namespace BingApplication
          * */
         private void menuItemExit_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            System.Windows.Application.Current.Shutdown();
         }
 
         private void menuItemSetup_Click(object sender, RoutedEventArgs e)
@@ -186,5 +228,19 @@ namespace BingApplication
             System.Diagnostics.Process.Start(@"explorer.exe", System.IO.Path.GetFullPath(ConfigUtils.getStorgePath().Value));
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
+            notifyTip("提示", "每日bing壁纸获取程序 已最小化到系统托盘", 2000);
+            
+        }
+
+        private void notifyTip(string title, string text, int timeout)
+        {
+            this.notifyIcon.BalloonTipTitle = title;
+            this.notifyIcon.BalloonTipText = text;
+            this.notifyIcon.ShowBalloonTip(timeout);
+        }
     }
 }
