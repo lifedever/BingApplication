@@ -34,6 +34,7 @@ namespace BingApplication
         {
             textPath.Text = ConfigUtils.getStorgePath().Value;
             chkWall.IsChecked = Boolean.Parse(ConfigUtils.getAutoWallPaper().Value);
+            chkAutoStart.IsChecked = Boolean.Parse(ConfigUtils.getAutoStartup().Value);
         }
 
         private void selectPath_Click(object sender, RoutedEventArgs e)
@@ -62,6 +63,7 @@ namespace BingApplication
         {
             ConfigUtils.setStorgePath(textPath.Text);
             ConfigUtils.setAutoWallPaper(chkWall.IsChecked.ToString());
+            ConfigUtils.setAutoStartup(chkAutoStart.IsChecked.ToString());
         }
     }
 }

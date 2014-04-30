@@ -14,6 +14,7 @@ namespace BingApplication
     {
         public const string STORGE_PATH = "storgePath";
         public const string AUTO_WALLPAPER = "autoWallPaper";
+        public const string AUTO_STARTUP = "autoStartup";
 
         /// <summary>
         /// 获取配置信息
@@ -57,10 +58,7 @@ namespace BingApplication
             config.Save();
         }
 
-        public static KeyValueConfigurationElement getAutoWallPaper()
-        {
-            return getConfig().AppSettings.Settings[AUTO_WALLPAPER];
-        }
+       
 
         /// <summary>
         /// 初始化系统参数
@@ -69,44 +67,85 @@ namespace BingApplication
         {
             initStorgePath();
             initAutoWallPaper();
+            initAutoStartup();
         }
 
-
-        private static void initAutoWallPaper()
-        {
-            setAutoWallPaper("False");
-        }
-
-        /// <summary>
-        /// 初始化存储参数
-        /// </summary>
-        /// <param name="config"></param>
         private static void initStorgePath()
         {
-            string dir = AppDomain.CurrentDomain.BaseDirectory;
-            dir = dir.EndsWith("/") || dir.EndsWith("\\") ? dir + "bing/" : dir + "/bing/";
-            setStorgePath(dir);
-
-            if (!Directory.Exists(dir))
+            if (getStorgePath() == null)
             {
-                Directory.CreateDirectory(dir);
+                string dir = AppDomain.CurrentDomain.BaseDirectory;
+                dir = dir.EndsWith("/") || dir.EndsWith("\\") ? dir + "bing/" : dir + "/bing/";
+                setStorgePath(dir);
+
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+            }            
+        }
+        private static void initAutoWallPaper()
+        {
+            if (getAutoWallPaper() == null)
+            {
+                setAutoWallPaper("False");
             }
         }
 
+        private static void initAutoStartup()
+        {
+            if (getAutoStartup() == null)
+            {
+                setAutoStartup("False");
+            }
+        }
+
+        public static KeyValueConfigurationElement getAutoWallPaper()
+        {
+            return getConfig().AppSettings.Settings[AUTO_WALLPAPER];
+        }
 
         internal static void setAutoWallPaper(string p)
         {
-            KeyValueConfigurationElement element = ConfigUtils.getAutoWallPaper();
-            Configuration config = getConfig();
-            if (element == null || string.IsNullOrEmpty(element.Value))
+            setProp(p, AUTO_WALLPAPER);
+        }
+
+        public static KeyValueConfigurationElement getAutoStartup()
+        {
+            return getConfig().AppSettings.Settings[AUTO_STARTUP];
+        }
+        public static void setAutoStartup(string p)
+        {
+            setProp(p, AUTO_STARTUP);
+
+            if (Boolean.Parse(p))
             {
-                config.AppSettings.Settings.Add(AUTO_WALLPAPER, p);
+                SystemUtils.setAutoStartup();
             }
             else
             {
-                config.AppSettings.Settings[AUTO_WALLPAPER].Value = p;
+                SystemUtils.cancleAutoStartup();
+            }
+        }
+
+        private static void setProp(string p, string key)
+        {
+            KeyValueConfigurationElement element = ConfigUtils.getElement(key);
+            Configuration config = getConfig();
+            if (element == null || string.IsNullOrEmpty(element.Value))
+            {
+                config.AppSettings.Settings.Add(key, p);
+            }
+            else
+            {
+                config.AppSettings.Settings[key].Value = p;
             }
             config.Save();
+        }
+
+        private static KeyValueConfigurationElement getElement(string key)
+        {
+            return getConfig().AppSettings.Settings[key];
         }
     }
 }
