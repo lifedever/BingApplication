@@ -242,5 +242,23 @@ namespace BingApplication
             this.notifyIcon.BalloonTipText = text;
             this.notifyIcon.ShowBalloonTip(timeout);
         }
+
+        private void menuItemSave_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            //dlg.FileName = "图片"; // Default file name
+            //dlg.DefaultExt = ".jpg"; // Default file extension
+            dlg.Filter = "图片文件|*.jpg"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                File.Copy(getImageFullPath(),filename);
+            }
+        }
     }
 }
