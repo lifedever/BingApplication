@@ -71,8 +71,7 @@ namespace BingApplication
         /// <param name="e"></param>
         private void timer_tick(object sender, EventArgs e)
         {
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            dir = config.AppSettings.Settings[SetupWindow.STORGE_PATH].Value + "bing/";
+            dir = ConfigUtils.getStorgePath().Value;
             path = @dir + DateTime.Today.ToLongDateString() + ".jpg";
 
             if (!File.Exists(path))
@@ -96,8 +95,7 @@ namespace BingApplication
         {
             try
             {
-                Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                KeyValueConfigurationElement autoWallpaper = config.AppSettings.Settings[SetupWindow.AUTO_WALLPAPER];
+                KeyValueConfigurationElement autoWallpaper = ConfigUtils.getAutoWallPaper();
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
                     WallpaperUtils.setWallpaper(path);
@@ -119,13 +117,7 @@ namespace BingApplication
          * */
         private void loadConfig()
         {
-            Configuration config = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            if (config.AppSettings.Settings[SetupWindow.STORGE_PATH] == null || string.IsNullOrEmpty(config.AppSettings.Settings[SetupWindow.STORGE_PATH].Value))
-            {
-                config.AppSettings.Settings.Add(SetupWindow.STORGE_PATH, AppDomain.CurrentDomain.BaseDirectory);
-                config.Save();
-            }
-            
+            ConfigUtils.initConfig();
         }
 
         private void getImg_Click(object sender, RoutedEventArgs e)
