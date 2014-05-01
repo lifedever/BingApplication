@@ -203,6 +203,13 @@ namespace BingApplication
          * */
         private void menuItemExit_Click(object sender, RoutedEventArgs e)
         {
+            appClose();
+        }
+
+        private void appClose()
+        {
+
+            this.notifyIcon.Visible = false;
             System.Windows.Application.Current.Shutdown();
         }
 
