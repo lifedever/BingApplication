@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BingApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Bing壁纸获取工具" Height="400" Width="580" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="1140395.ico" Closing="Window_Closing">
+        Title="每日Bing壁纸v0.1.1" Height="400" Width="580" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="1140395.ico" Closing="Window_Closing">
     <Grid >
         <DockPanel LastChildFill="True">
             <StatusBar DockPanel.Dock="Bottom" Height="25">
