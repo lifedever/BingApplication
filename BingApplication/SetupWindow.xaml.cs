@@ -67,5 +67,15 @@ namespace BingApplication
             ConfigUtils.setAutoStartup(chkAutoStart.IsChecked.ToString());
             ConfigUtils.setAutoSave(chkSave.IsChecked.ToString());
         }
+
+        private void chkWall_Click(object sender, RoutedEventArgs e)
+        {
+            chkSave.IsChecked = chkWall.IsChecked;
+            if (chkWall.IsChecked == true && ConfigUtils.getElement(ConfigUtils.WARNING_SAVE).Value.Equals("Yes"))
+            {
+                MessageBoxResult result = System.Windows.MessageBox.Show("您选择了自动设置桌面壁纸选项，程序需要将图片下载到本地才能保证运行正常！\n是否需要继续看到该提醒？", "这是一条提示信息", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                ConfigUtils.setProp(result.ToString(),ConfigUtils.WARNING_SAVE);
+            }
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace BingApplication
         public const string AUTO_WALLPAPER = "autoWallPaper";
         public const string AUTO_STARTUP = "autoStartup";
         public const string AUTO_SAVE = "autoSave";
+        public const string WARNING_SAVE = "warningSave";
 
         /// <summary>
         /// 获取配置信息
@@ -70,6 +71,7 @@ namespace BingApplication
             initAutoWallPaper();
             initAutoStartup();
             initAutoSave();
+            initWarningSave();
         }
 
         private static void initStorgePath()
@@ -110,6 +112,14 @@ namespace BingApplication
             }
         }
 
+        private static void initWarningSave()
+        {
+            if (getWarningSave() == null)
+            {
+                setWarningSave("Yes");
+            }
+        }
+
         public static KeyValueConfigurationElement getAutoWallPaper()
         {
             return getConfig().AppSettings.Settings[AUTO_WALLPAPER];
@@ -130,6 +140,17 @@ namespace BingApplication
             setProp(p, AUTO_SAVE);
         }
 
+        public static KeyValueConfigurationElement getWarningSave()
+        {
+            return getConfig().AppSettings.Settings[WARNING_SAVE];
+        }
+
+        internal static void setWarningSave(string p)
+        {
+            setProp(p, WARNING_SAVE);
+        }
+
+
         public static KeyValueConfigurationElement getAutoStartup()
         {
             return getConfig().AppSettings.Settings[AUTO_STARTUP];
@@ -148,7 +169,7 @@ namespace BingApplication
             }
         }
 
-        private static void setProp(string p, string key)
+        public static void setProp(string p, string key)
         {
             KeyValueConfigurationElement element = ConfigUtils.getElement(key);
             Configuration config = getConfig();
@@ -163,7 +184,7 @@ namespace BingApplication
             config.Save();
         }
 
-        private static KeyValueConfigurationElement getElement(string key)
+        public static KeyValueConfigurationElement getElement(string key)
         {
             return getConfig().AppSettings.Settings[key];
         }

@@ -111,16 +111,15 @@ namespace BingApplication
         /// <param name="e"></param>
         private void timer_tick(object sender, EventArgs e)
         {
-            if (!File.Exists(getImageFullPath()))
+            bool autoSave = Boolean.Parse(ConfigUtils.getAutoSave().Value);
+            if (autoSave)
             {
-                bool autoSave = Boolean.Parse(ConfigUtils.getAutoSave().Value);
-                if (autoSave)
+                if (!File.Exists(getImageFullPath()))
                 {
                     downloadImage();
                 }
+                setWallpaper();
             }
-            setWallpaper();
-           
         }
 
         /// <summary>
