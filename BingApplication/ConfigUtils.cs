@@ -15,6 +15,7 @@ namespace BingApplication
         public const string STORGE_PATH = "storgePath";
         public const string AUTO_WALLPAPER = "autoWallPaper";
         public const string AUTO_STARTUP = "autoStartup";
+        public const string AUTO_SAVE = "autoSave";
 
         /// <summary>
         /// 获取配置信息
@@ -68,6 +69,7 @@ namespace BingApplication
             initStorgePath();
             initAutoWallPaper();
             initAutoStartup();
+            initAutoSave();
         }
 
         private static void initStorgePath()
@@ -100,6 +102,14 @@ namespace BingApplication
             }
         }
 
+        private static void initAutoSave()
+        {
+            if (getAutoSave() == null)
+            {
+                setAutoSave("False");
+            }
+        }
+
         public static KeyValueConfigurationElement getAutoWallPaper()
         {
             return getConfig().AppSettings.Settings[AUTO_WALLPAPER];
@@ -108,6 +118,16 @@ namespace BingApplication
         internal static void setAutoWallPaper(string p)
         {
             setProp(p, AUTO_WALLPAPER);
+        }
+
+        public static KeyValueConfigurationElement getAutoSave()
+        {
+            return getConfig().AppSettings.Settings[AUTO_SAVE];
+        }
+
+        internal static void setAutoSave(string p)
+        {
+            setProp(p, AUTO_SAVE);
         }
 
         public static KeyValueConfigurationElement getAutoStartup()

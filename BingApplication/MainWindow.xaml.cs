@@ -53,7 +53,7 @@ namespace BingApplication
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
             exit.Click += new EventHandler((o , e) =>
             {
-                System.Windows.Application.Current.Shutdown();
+                appClose();
             });
 
             //关联托盘控件
@@ -113,7 +113,11 @@ namespace BingApplication
         {
             if (!File.Exists(getImageFullPath()))
             {
-                downloadImage();
+                bool autoSave = Boolean.Parse(ConfigUtils.getAutoSave().Value);
+                if (autoSave)
+                {
+                    downloadImage();
+                }
             }
             setWallpaper();
            
