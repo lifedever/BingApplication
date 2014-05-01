@@ -13,7 +13,8 @@
                 <Menu DockPanel.Dock="Top">
                     <MenuItem Header="文件">
                         <MenuItem Header="打开图片目录" Name="menuItemOpenImage" Click="menuItemOpenImage_Click"></MenuItem>
-                        <MenuItem Header="图片另存为" Name="menuItemSave" Click="menuItemSave_Click"></MenuItem>                        <Separator/>
+                        <MenuItem Header="图片另存为" Name="menuItemSave" Click="menuItemSave_Click"></MenuItem>                        
+                        <Separator/>
                         <MenuItem Header="退出" Name="menuItemExit" Click="menuItemExit_Click"></MenuItem>
                     </MenuItem>
                     <MenuItem Header="选项">
@@ -28,8 +29,10 @@
                     <Image Name="img" Stretch="UniformToFill">
                         <Image.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="打开图片目录" Click="menuItemOpenImage_Click"></MenuItem>
-                                <MenuItem Header="图片另存为" Click="menuItemSave_Click"></MenuItem>
+                                <MenuItem Header="一键壁纸" ToolTip="一键将图片设置为桌面壁纸" Name="oneKeySetup" Click="oneKeySetup_Click"></MenuItem>
+                                <Separator/>
+                                <MenuItem Header="图片另存" ToolTip="将图片保存到本地" Click="menuItemSave_Click"></MenuItem>
+                                <MenuItem Header="打开目录" ToolTip="打开图片存储目录" Click="menuItemOpenImage_Click"></MenuItem>
                             </ContextMenu>
                         </Image.ContextMenu>
                     </Image>

@@ -49,6 +49,12 @@ namespace BingApplication
                 this.Show();
             });
 
+            System.Windows.Forms.MenuItem oneKeySetup = new System.Windows.Forms.MenuItem("一键壁纸");
+            oneKeySetup.Click += new EventHandler((o, e) => 
+            {
+                oneKeySetWallpaper();
+            });
+
             //退出菜单项
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
             exit.Click += new EventHandler((o , e) =>
@@ -57,7 +63,13 @@ namespace BingApplication
             });
 
             //关联托盘控件
-            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { open, exit };
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] 
+            { 
+                open,
+                oneKeySetup,
+                new System.Windows.Forms.MenuItem("-"), 
+                exit 
+            };
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
             
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler((o, e) =>
@@ -133,7 +145,7 @@ namespace BingApplication
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
                     WallpaperUtils.setWallpaper(getImageFullPath());
-                    notifyTip("提示", "已自动切换为新的壁纸！", 3000);
+                    notifyTip("恭喜！", "已更换新的桌面壁纸！", 3000);
                 }
             }
             catch (Exception ee)
@@ -270,5 +282,21 @@ namespace BingApplication
                 File.Copy(getImageFullPath(),filename);
             }
         }
+
+        private void oneKeySetup_Click(object sender, RoutedEventArgs e)
+        {
+            oneKeySetWallpaper();    
+        }
+
+        private void oneKeySetWallpaper()
+        {
+            if (!File.Exists(getImageFullPath()))
+            {
+                downloadImage();
+            }
+            WallpaperUtils.setWallpaper(getImageFullPath());
+            notifyTip("恭喜！", "已更换新的桌面壁纸！", 3000);
+        }
+
     }
 }
