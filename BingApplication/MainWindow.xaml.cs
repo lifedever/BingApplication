@@ -129,8 +129,26 @@ namespace BingApplication
                 if (!File.Exists(getImageFullPath()))
                 {
                     downloadImage();
+                    setWallpaper();
                 }
-                setWallpaper();
+                else
+                {
+                    KeyValueConfigurationElement element = ConfigUtils.getElement(ConfigUtils.WALLPAPER_TIME);
+
+                    if (element == null)
+                    {
+                        setWallpaper();
+                    }
+                    else
+                    {
+                        string shortDateString = element.Value;
+                        DateTime changeTime = DateTime.Parse(shortDateString);
+                        if (DateTime.Today.CompareTo(changeTime) > 0)
+                        {
+                            setWallpaper();
+                        }
+                    }
+                }
             }
         }
 
@@ -145,7 +163,8 @@ namespace BingApplication
                 if (autoWallpaper != null && autoWallpaper.Value == "True")
                 {
                     WallpaperUtils.setWallpaper(getImageFullPath());
-                    notifyTip("恭喜！", "已更换新的桌面壁纸！", 3000);
+                    notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
+                    
                 }
             }
             catch (Exception ee)
@@ -295,7 +314,7 @@ namespace BingApplication
                 downloadImage();
             }
             WallpaperUtils.setWallpaper(getImageFullPath());
-            notifyTip("恭喜！", "已更换新的桌面壁纸！", 3000);
+            notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
         }
 
     }

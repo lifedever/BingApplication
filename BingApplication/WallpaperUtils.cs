@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -23,6 +24,7 @@ namespace BingApplication
             if (File.Exists(Path))
             {
                 SystemParametersInfo(20, 0, Path, 0x2); // 0x1 | 0x2 
+                ConfigUtils.setProp(DateTime.Today.ToString("yyyy/MM/dd", DateTimeFormatInfo.InvariantInfo), ConfigUtils.WALLPAPER_TIME);
             }
         }
     }

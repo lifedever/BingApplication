@@ -17,6 +17,7 @@ namespace BingApplication
         public const string AUTO_STARTUP = "autoStartup";
         public const string AUTO_SAVE = "autoSave";
         public const string WARNING_SAVE = "warningSave";
+        public const string WALLPAPER_TIME = "wallpaperTime";
 
         /// <summary>
         /// 获取配置信息
