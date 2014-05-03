@@ -2,42 +2,42 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="每日Bing壁纸v0.1.1" Height="400" Width="580" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="1140395.ico" Closing="Window_Closing">
-    <Grid >
-        <DockPanel LastChildFill="True">
-            <StatusBar DockPanel.Dock="Bottom" Height="25">
-                <TextBlock>
-                        <Hyperlink Name="hyperlink" Click="hyperlink_Click">点击访问图片</Hyperlink>
-                </TextBlock>
-            </StatusBar>
-            <DockPanel DockPanel.Dock="Top">
-                <Menu DockPanel.Dock="Top">
-                    <MenuItem Header="文件">
-                        <MenuItem Header="打开图片目录" Name="menuItemOpenImage" Click="menuItemOpenImage_Click"></MenuItem>
-                        <MenuItem Header="图片另存为" Name="menuItemSave" Click="menuItemSave_Click"></MenuItem>                        
-                        <Separator/>
-                        <MenuItem Header="退出" Name="menuItemExit" Click="menuItemExit_Click"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="选项">
-                        <MenuItem Header="设置" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
-                    </MenuItem>
-                    <MenuItem Header="帮助">
-                        <MenuItem Header="关于" Name="menuItemAbout" Click="menuItemAbout_Click"></MenuItem>
-                    </MenuItem>
-                </Menu>
-                <StackPanel DockPanel.Dock="Bottom" Margin="5">
-                    <TextBlock ><Run Text="今天"/><Run Text="bing"/><Run Text="壁纸推荐："/></TextBlock>
-                    <Image Name="img" Stretch="UniformToFill">
-                        <Image.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="一键壁纸" ToolTip="一键将图片设置为桌面壁纸" Name="oneKeySetup" Click="oneKeySetup_Click"></MenuItem>
-                                <Separator/>
-                                <MenuItem Header="图片另存" ToolTip="将图片保存到本地" Click="menuItemSave_Click"></MenuItem>
-                                <MenuItem Header="打开目录" ToolTip="打开图片存储目录" Click="menuItemOpenImage_Click"></MenuItem>
-                            </ContextMenu>
-                        </Image.ContextMenu>
-                    </Image>
-                </StackPanel>
-            </DockPanel>
-        </DockPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="文件">
+                <MenuItem Header="打开图片目录" Name="menuItemOpenImage" Click="menuItemOpenImage_Click"></MenuItem>
+                <MenuItem Header="图片另存为" Name="menuItemSave" Click="menuItemSave_Click"></MenuItem>
+                <Separator/>
+                <MenuItem Header="退出" Name="menuItemExit" Click="menuItemExit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="选项">
+                <MenuItem Header="设置" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="帮助">
+                <MenuItem Header="关于" Name="menuItemAbout" Click="menuItemAbout_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TextBlock Grid.Row="1" Margin="4">今天Bing壁纸推荐：</TextBlock>
+        <Image Grid.Row="2" Margin="4" Name="img" Stretch="UniformToFill">
+            <Image.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="一键壁纸" ToolTip="一键将图片设置为桌面壁纸" Name="oneKeySetup" Click="oneKeySetup_Click"></MenuItem>
+                    <Separator/>
+                    <MenuItem Header="图片另存" ToolTip="将图片保存到本地" Click="menuItemSave_Click"></MenuItem>
+                    <MenuItem Header="打开目录" ToolTip="打开图片存储目录" Click="menuItemOpenImage_Click"></MenuItem>
+                </ContextMenu>
+            </Image.ContextMenu>
+        </Image>
+        <StatusBar Grid.Row="3" Height="25">
+            <TextBlock>
+                    <Hyperlink Name="hyperlink" Click="hyperlink_Click">点击访问图片</Hyperlink>
+            </TextBlock>
+        </StatusBar>
     </Grid>
 </Window>
