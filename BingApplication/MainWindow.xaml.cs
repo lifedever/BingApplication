@@ -43,18 +43,24 @@ namespace BingApplication
             this.notifyIcon.Visible = true;
 
             //打开菜单项
-            System.Windows.Forms.MenuItem open = new System.Windows.Forms.MenuItem("打开");
+            System.Windows.Forms.MenuItem open = new System.Windows.Forms.MenuItem("显示窗口");
             open.Click += new EventHandler((o, e) =>
             {
                 this.Show();
             });
 
+            //一键壁纸
             System.Windows.Forms.MenuItem oneKeySetup = new System.Windows.Forms.MenuItem("一键壁纸");
             oneKeySetup.Click += new EventHandler((o, e) => 
             {
                 oneKeySetWallpaper();
             });
-
+            //打开目录
+            System.Windows.Forms.MenuItem openImageDir = new System.Windows.Forms.MenuItem("打开目录");
+            openImageDir.Click += new EventHandler((o,e) => 
+            {
+                openDir();
+            });
             //退出菜单项
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
             exit.Click += new EventHandler((o , e) =>
@@ -66,7 +72,9 @@ namespace BingApplication
             System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] 
             { 
                 open,
+                new System.Windows.Forms.MenuItem("-"), 
                 oneKeySetup,
+                openImageDir,
                 new System.Windows.Forms.MenuItem("-"), 
                 exit 
             };
@@ -266,7 +274,13 @@ namespace BingApplication
 
         private void menuItemOpenImage_Click(object sender, RoutedEventArgs e)
         {
+            openDir();
+        }
+
+        private void openDir()
+        {
             System.Diagnostics.Process.Start(@"explorer.exe", System.IO.Path.GetFullPath(ConfigUtils.getStorgePath().Value));
+
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

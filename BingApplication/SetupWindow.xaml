@@ -1,7 +1,7 @@
 ﻿<Window x:Class="BingApplication.SetupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="设置" Height="220" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Closing="Window_Closing" Icon="1140395.ico" >
+        Title="设置" Height="220" Width="350" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Closing="Window_Closing" Icon="app.ico" >
     <Grid>
         <DockPanel>
             <TextBlock DockPanel.Dock="Bottom" Margin="10 2">提示：壁纸默认保存在程序所在路径的bing目录</TextBlock>
