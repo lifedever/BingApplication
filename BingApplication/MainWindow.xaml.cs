@@ -32,6 +32,8 @@ namespace BingApplication
         {
             
             InitializeComponent();
+            this.Title = "每日Bing壁纸" + ConfigUtils.VERSION;
+
             InitNotify();
         }
 

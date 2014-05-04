@@ -14,6 +14,7 @@ namespace BingApplication
         {
             InitializeComponent();
             this.Text = String.Format("关于 {0}", AssemblyTitle);
+            this.label1.Text = "版本：" + ConfigUtils.VERSION;
             this.labelProductName.Text = AssemblyProduct;
             this.labelCopyright.Text = AssemblyCopyright;
             this.labelCompanyName.Text = AssemblyCompany;
