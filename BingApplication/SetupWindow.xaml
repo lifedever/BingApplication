@@ -14,7 +14,7 @@
                     </StackPanel>
                     <CheckBox Margin="4" Name="chkSave">保存当天壁纸到本地</CheckBox>
                     <CheckBox Margin="4" Name="chkWall" Click="chkWall_Click">自动将当天的壁纸设置成桌面背景</CheckBox>
-                    <CheckBox Margin="4" Name="chkAutoStart">随Windows登录自动启动</CheckBox>
+                    <!--<CheckBox Margin="4" Name="chkAutoStart">随Windows登录自动启动</CheckBox>-->
                 </StackPanel>
             </GroupBox>
         </DockPanel>

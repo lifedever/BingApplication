@@ -72,7 +72,7 @@ namespace BingApplication
         {
             initStorgePath();
             initAutoWallPaper();
-            initAutoStartup();
+            //initAutoStartup();
             initAutoSave();
             initWarningSave();
         }
