@@ -42,14 +42,10 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange" Click="autoChange_Click">开启自动更换壁纸</CheckBox>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}}">
-                        <TextBlock Grid.Row="2" Grid.Column="2">
-                        更换时间间隔：
-                        </TextBlock>
-                        <ComboBox Name="combobox">
-                            <ComboBoxItem>ddd</ComboBoxItem>
-                        </ComboBox>
+                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange">开启自动更换壁纸</CheckBox>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}, Mode=OneWay}">
+                        <TextBlock Grid.Row="2" Grid.Column="2">更换时间间隔：</TextBlock>
+                        <ComboBox Name="combobox"></ComboBox>
                     </StackPanel>
                 </Grid>
             </GroupBox>

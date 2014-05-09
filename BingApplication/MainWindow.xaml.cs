@@ -333,5 +333,10 @@ namespace BingApplication
             notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
         }
 
+        private void MenuItem_Checked(object sender, RoutedEventArgs e)
+        {
+            //TODO 需要完善
+        }
+
     }
 }

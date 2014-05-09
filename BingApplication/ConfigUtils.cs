@@ -20,6 +20,9 @@ namespace BingApplication
         public const string AUTO_SAVE = "autoSave";
         public const string WARNING_SAVE = "warningSave";
         public const string WALLPAPER_TIME = "wallpaperTime";
+        public const string AUTO_CHANGE_WALLPAPER = "autoChangeWallPaper";
+        public const string AUTO_CHANGE_WALLPAPER_INTERVAL = "autoChangeWallPaperInterval";
+
 
         /// <summary>
         /// 获取配置信息
@@ -75,6 +78,16 @@ namespace BingApplication
             //initAutoStartup();
             initAutoSave();
             initWarningSave();
+            initAutoChangeWallPaper();
+        }
+
+        private static void initAutoChangeWallPaper()
+        {
+            KeyValueConfigurationElement element = getElement(AUTO_CHANGE_WALLPAPER);
+            if (element == null)
+            {
+                setProp("False", AUTO_CHANGE_WALLPAPER);
+            }
         }
 
         private static void initStorgePath()

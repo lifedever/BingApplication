@@ -1,7 +1,13 @@
 ﻿<Window x:Class="BingApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BingApplication"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:p ="clr-namespace:BingApplication.Properties"
         Title="" Height="400" Width="580" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="app.ico" Closing="Window_Closing">
+    <Window.Resources>
+        <local:BindDataProvider x:Key="data"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
@@ -17,7 +23,7 @@
                 <MenuItem Header="退出" Name="menuItemExit" Click="menuItemExit_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="工具">
-                <MenuItem Header="自动更换壁纸" IsCheckable="True"></MenuItem>
+                <MenuItem Header="自动更换壁纸" IsCheckable="True" Checked="MenuItem_Checked" IsChecked="{Binding Source={StaticResource data}, Path=AutoChanged, Mode=OneWay}"></MenuItem>
                 <MenuItem Header="选项" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="帮助">

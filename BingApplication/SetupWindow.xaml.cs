@@ -64,6 +64,7 @@ namespace BingApplication
             chkWall.IsChecked = Boolean.Parse(ConfigUtils.getAutoWallPaper().Value);
             //chkAutoStart.IsChecked = Boolean.Parse(ConfigUtils.getAutoStartup().Value);
             chkSave.IsChecked = Boolean.Parse(ConfigUtils.getAutoSave().Value);
+            autoChange.IsChecked = Boolean.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER).Value);
         }
 
         private void selectPath_Click(object sender, RoutedEventArgs e)
@@ -94,6 +95,9 @@ namespace BingApplication
             ConfigUtils.setAutoWallPaper(chkWall.IsChecked.ToString());
             //ConfigUtils.setAutoStartup(chkAutoStart.IsChecked.ToString());
             ConfigUtils.setAutoSave(chkSave.IsChecked.ToString());
+            ConfigUtils.setProp(autoChange.IsChecked.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER);
+            ComboInterval interval = combobox.SelectedValue as ComboInterval;
+            ConfigUtils.setProp(interval.Interval.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
         }
 
         private void chkWall_Click(object sender, RoutedEventArgs e)
@@ -107,11 +111,6 @@ namespace BingApplication
                 MessageBoxResult result = System.Windows.MessageBox.Show("您选择了自动设置桌面壁纸选项，程序需要将图片下载到本地才能保证运行正常！\n是否需要继续看到该提醒？", "这是一条提示信息", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 ConfigUtils.setProp(result.ToString(),ConfigUtils.WARNING_SAVE);
             }
-        }
-
-        private void autoChange_Click(object sender, RoutedEventArgs e)
-        {
-            
         }
     }
 }
