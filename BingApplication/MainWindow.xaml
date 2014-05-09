@@ -16,8 +16,9 @@
                 <Separator/>
                 <MenuItem Header="退出" Name="menuItemExit" Click="menuItemExit_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Header="选项">
-                <MenuItem Header="设置" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
+            <MenuItem Header="工具">
+                <MenuItem Header="自动更换壁纸" IsCheckable="True"></MenuItem>
+                <MenuItem Header="选项" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="帮助">
                 <MenuItem Header="关于" Name="menuItemAbout" Click="menuItemAbout_Click"></MenuItem>

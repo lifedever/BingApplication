@@ -24,7 +24,35 @@ namespace BingApplication
         public SetupWindow()
         {
             InitializeComponent();
+            InitData();
             IniConfig();
+        }
+
+        /// <summary>
+        /// 初始化数据
+        /// </summary>
+        private void InitData()
+        {
+            initComboData();
+        }
+
+        /// <summary>
+        /// 初始化下拉列表数据
+        /// </summary>
+        private void initComboData()
+        {
+            List<ComboInterval> datas = new List<ComboInterval>(){
+                new ComboInterval(){Name="1分钟", Interval = 1},
+                new ComboInterval(){Name="5分钟", Interval = 5},
+                new ComboInterval(){Name="10分钟", Interval = 10},
+                new ComboInterval(){Name="30分钟", Interval = 30},
+                new ComboInterval(){Name="1小时", Interval = 60}
+            };
+
+            combobox.ItemsSource = datas;
+            combobox.SelectedValue = "Interval";
+            combobox.DisplayMemberPath = "Name";
+            combobox.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -79,6 +107,11 @@ namespace BingApplication
                 MessageBoxResult result = System.Windows.MessageBox.Show("您选择了自动设置桌面壁纸选项，程序需要将图片下载到本地才能保证运行正常！\n是否需要继续看到该提醒？", "这是一条提示信息", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 ConfigUtils.setProp(result.ToString(),ConfigUtils.WARNING_SAVE);
             }
+        }
+
+        private void autoChange_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

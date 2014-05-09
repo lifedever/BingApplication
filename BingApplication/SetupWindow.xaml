@@ -6,6 +6,7 @@
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="10"/>
         </Style>
+        <BooleanToVisibilityConverter x:Key="b2v"/>
     </Window.Resources>
     <Grid>
         <StackPanel>
@@ -32,7 +33,7 @@
                     <!--<CheckBox Margin="4" Name="chkAutoStart">随Windows登录自动启动</CheckBox>-->
                 </Grid>
             </GroupBox>
-            <GroupBox Header="高级" Height="Auto">
+            <GroupBox Header="高级" MinHeight="90">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -41,18 +42,13 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange">开启自动更换壁纸</CheckBox>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange" Click="autoChange_Click">开启自动更换壁纸</CheckBox>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}}">
                         <TextBlock Grid.Row="2" Grid.Column="2">
                         更换时间间隔：
                         </TextBlock>
-                        <ComboBox>
-                            <ComboBoxItem IsSelected="True">
-                                1分钟
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                2分钟
-                            </ComboBoxItem>
+                        <ComboBox Name="combobox">
+                            <ComboBoxItem>ddd</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                 </Grid>
