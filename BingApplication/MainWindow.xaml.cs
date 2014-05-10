@@ -116,9 +116,11 @@ namespace BingApplication
 
         private void initializeChangeTimer()
         {
+            changeTimer.Stop();
             if (Boolean.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER).Value))
             {
-                changeTimer.Interval = new TimeSpan(0, BindDataProvider.autoChangeInterval, 0);
+                int interval = int.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL).Value);
+                changeTimer.Interval = new TimeSpan(0, interval, 0);
                 changeTimer.Tick += new EventHandler(changeTimer_tick);
                 changeTimer.Start();
             }

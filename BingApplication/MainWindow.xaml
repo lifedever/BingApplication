@@ -40,9 +40,16 @@
             </Image.ContextMenu>
         </Image>
         <StatusBar Grid.Row="3" Height="25">
-            <TextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="240"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0">
                     <Hyperlink Name="hyperlink" Click="hyperlink_Click">点击访问图片</Hyperlink>
-            </TextBlock>
+                </TextBlock>
+                <TextBlock Grid.Column="1" Name="changeStatusInfo"></TextBlock>
+            </Grid>
         </StatusBar>
     </Grid>
 </Window>

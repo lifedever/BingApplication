@@ -30,5 +30,4 @@ F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication.AboutBox1.resources
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication.Properties.Resources.resources
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication.csproj.GenerateResource.Cache
-F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\GeneratedInternalTypeHelper.g.cs
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication_MarkupCompile.lref

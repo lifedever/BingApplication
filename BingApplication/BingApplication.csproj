@@ -60,7 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BindDataProvider.cs" />
     <Compile Include="ComboInterval.cs" />
     <Compile Include="ConfigUtils.cs" />
     <Compile Include="InverseBooleanConverter.cs" />
