@@ -12,5 +12,27 @@ namespace BingApplication
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            MainWindow w = new MainWindow();
+            w.Show();
+        }
+        public void activate()
+        {
+            MainWindow.Activate();
+        }
+        private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
+        {
+
+        }
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+
+        }
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+
+        }
     }
 }

@@ -38,6 +38,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -66,6 +67,7 @@
     <Compile Include="SetupWindow.xaml.cs">
       <DependentUpon>SetupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SingleInstanceApplicationWrapper.cs" />
     <Compile Include="SystemUtils.cs" />
     <Compile Include="WallpaperUtils.cs" />
     <Page Include="MainWindow.xaml">
