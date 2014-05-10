@@ -30,3 +30,4 @@ F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication.AboutBox1.resources
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication.Properties.Resources.resources
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication.csproj.GenerateResource.Cache
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication_MarkupCompile.lref

@@ -6,7 +6,6 @@
         xmlns:p ="clr-namespace:BingApplication.Properties"
         Title="" Height="400" Width="580" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen" Icon="app.ico" Closing="Window_Closing">
     <Window.Resources>
-        <local:BindDataProvider x:Key="data"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
