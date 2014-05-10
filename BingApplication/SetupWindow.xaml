@@ -1,8 +1,10 @@
 ﻿<Window x:Class="BingApplication.SetupWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BingApplication"
         Title="设置" Height="300" Width="450" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowInTaskbar="False" Closing="Window_Closing" Icon="app.ico" >
     <Window.Resources>
+        <local:BindDataProvider x:Key="data"/>
         <Style TargetType="Grid">
             <Setter Property="Margin" Value="10"/>
         </Style>
@@ -42,7 +44,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange">开启自动更换壁纸</CheckBox>
+                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange"  IsChecked="{Binding Source={StaticResource data}, Path=AutoChanged}">开启自动更换壁纸</CheckBox>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}, Mode=OneWay}">
                         <TextBlock Grid.Row="2" Grid.Column="2">更换时间间隔：</TextBlock>
                         <ComboBox Name="combobox"></ComboBox>

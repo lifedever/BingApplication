@@ -26,6 +26,9 @@ namespace BingApplication
     public partial class MainWindow : Window
     {
         private DispatcherTimer timer = null;
+
+        private DispatcherTimer changeTimer = new DispatcherTimer();
+
         private NotifyIcon notifyIcon;
 
         public MainWindow()
@@ -101,6 +104,7 @@ namespace BingApplication
                 loadImg();
                 img.Visibility = System.Windows.Visibility.Visible;
                 initializeTimer();
+                initializeChangeTimer();
             }
             catch (Exception ee)
             {
@@ -108,6 +112,25 @@ namespace BingApplication
                 //MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
            
+        }
+
+        private void initializeChangeTimer()
+        {
+            if (Boolean.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER).Value))
+            {
+                changeTimer.Interval = new TimeSpan(0, 0, BindDataProvider.autoChangeInterval);
+                timer.Tick += new EventHandler(changeTimer_tick);
+                timer.Start();
+            }
+        }
+
+        private void changeTimer_tick(object sender, EventArgs e)
+        {
+            string[] files = Directory.GetFiles(ConfigUtils.getStorgePath().Value);
+            Random ran = new Random();
+
+            int n = ran.Next(0, files.Length-1);
+            setWallpaper(files[n]);
         }
 
         /// <summary>
@@ -118,7 +141,12 @@ namespace BingApplication
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 10);
             timer.Tick += new EventHandler(timer_tick);
-            timer.Start();
+
+            if (Boolean.Parse(ConfigUtils.getAutoSave().Value))
+            {
+                timer.Start();
+            }
+
         }
 
         private string getImageFullPath()
@@ -134,20 +162,19 @@ namespace BingApplication
         private void timer_tick(object sender, EventArgs e)
         {
             bool autoSave = Boolean.Parse(ConfigUtils.getAutoSave().Value);
-            if (autoSave)
+            if (autoSave)   //自动保存
             {
                 if (!File.Exists(getImageFullPath()))
                 {
                     downloadImage();
-                    setWallpaper();
                 }
-                else
+                if (Boolean.Parse(ConfigUtils.getAutoWallPaper().Value)&&File.Exists(getImageFullPath()))
                 {
                     KeyValueConfigurationElement element = ConfigUtils.getElement(ConfigUtils.WALLPAPER_TIME);
 
                     if (element == null)
                     {
-                        setWallpaper();
+                        setWallpaper(getImageFullPath());
                     }
                     else
                     {
@@ -155,7 +182,7 @@ namespace BingApplication
                         DateTime changeTime = DateTime.Parse(shortDateString);
                         if (DateTime.Today.CompareTo(changeTime) > 0)
                         {
-                            setWallpaper();
+                            setWallpaper(getImageFullPath());
                         }
                     }
                 }
@@ -165,24 +192,10 @@ namespace BingApplication
         /// <summary>
         /// 设置桌面壁纸
         /// </summary>
-        private void setWallpaper()
+        private void setWallpaper(string filePath)
         {
-            try
-            {
-                KeyValueConfigurationElement autoWallpaper = ConfigUtils.getAutoWallPaper();
-                if (autoWallpaper != null && autoWallpaper.Value == "True")
-                {
-                    WallpaperUtils.setWallpaper(getImageFullPath());
-                    notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
-                    
-                }
-            }
-            catch (Exception ee)
-            {
-                System.Windows.MessageBox.Show(ee.ToString());
-            }
-            
-            
+            WallpaperUtils.setWallpaper(filePath);
+            notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
         }
 
         /**
@@ -237,10 +250,6 @@ namespace BingApplication
             notifyTip("提示", "壁纸已下载并保存在"+getImageFullPath(), 2000);
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         /**
          * 退出应用程序
@@ -260,7 +269,36 @@ namespace BingApplication
         private void menuItemSetup_Click(object sender, RoutedEventArgs e)
         {
             SetupWindow setupWin = new SetupWindow();
+            setupWin.Owner = this;
             setupWin.ShowDialog();
+
+            updateConfig(setupWin);
+
+            if (!Boolean.Parse(ConfigUtils.getAutoSave().Value))
+            {
+                timer.Stop();
+            }
+            else
+            {
+                timer.Start();
+            }
+
+            initializeChangeTimer();
+        }
+
+        /// <summary>
+        /// 更新配置信息
+        /// </summary>
+        /// <param name="setupWin"></param>
+        private void updateConfig(SetupWindow setupWin)
+        {
+            ConfigUtils.setStorgePath(setupWin.textPath.Text);
+            ConfigUtils.setAutoWallPaper(setupWin.chkWall.IsChecked.ToString());
+            //ConfigUtils.setAutoStartup(chkAutoStart.IsChecked.ToString());
+            ConfigUtils.setAutoSave(setupWin.chkSave.IsChecked.ToString());
+            ConfigUtils.setProp(setupWin.autoChange.IsChecked.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER);
+            ComboInterval interval = setupWin.combobox.SelectedValue as ComboInterval;
+            ConfigUtils.setProp(interval.Interval.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
         }
 
         private void menuItemAbout_Click(object sender, RoutedEventArgs e)
@@ -333,10 +371,10 @@ namespace BingApplication
             notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
         }
 
-        private void MenuItem_Checked(object sender, RoutedEventArgs e)
+        private void autoChangeMenu_Click(object sender, RoutedEventArgs e)
         {
-            //TODO 需要完善
         }
+
 
     }
 }

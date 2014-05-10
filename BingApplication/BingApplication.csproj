@@ -65,6 +65,7 @@
     <Compile Include="BindDataProvider.cs" />
     <Compile Include="ComboInterval.cs" />
     <Compile Include="ConfigUtils.cs" />
+    <Compile Include="InverseBooleanConverter.cs" />
     <Compile Include="SetupWindow.xaml.cs">
       <DependentUpon>SetupWindow.xaml</DependentUpon>
     </Compile>

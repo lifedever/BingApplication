@@ -65,6 +65,22 @@ namespace BingApplication
             //chkAutoStart.IsChecked = Boolean.Parse(ConfigUtils.getAutoStartup().Value);
             chkSave.IsChecked = Boolean.Parse(ConfigUtils.getAutoSave().Value);
             autoChange.IsChecked = Boolean.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER).Value);
+
+            KeyValueConfigurationElement e = ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
+            if (e != null)
+            {
+                int interval = int.Parse(e.Value);
+
+                foreach (var item in combobox.ItemsSource)
+                {
+                    ComboInterval cil = item as ComboInterval;
+                    if (interval == cil.Interval)
+                    {
+                        combobox.SelectedItem = cil;
+                        break;
+                    }
+                }
+            }
         }
 
         private void selectPath_Click(object sender, RoutedEventArgs e)
@@ -91,13 +107,7 @@ namespace BingApplication
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ConfigUtils.setStorgePath(textPath.Text);
-            ConfigUtils.setAutoWallPaper(chkWall.IsChecked.ToString());
-            //ConfigUtils.setAutoStartup(chkAutoStart.IsChecked.ToString());
-            ConfigUtils.setAutoSave(chkSave.IsChecked.ToString());
-            ConfigUtils.setProp(autoChange.IsChecked.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER);
-            ComboInterval interval = combobox.SelectedValue as ComboInterval;
-            ConfigUtils.setProp(interval.Interval.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
+            
         }
 
         private void chkWall_Click(object sender, RoutedEventArgs e)
@@ -112,5 +122,6 @@ namespace BingApplication
                 ConfigUtils.setProp(result.ToString(),ConfigUtils.WARNING_SAVE);
             }
         }
+
     }
 }

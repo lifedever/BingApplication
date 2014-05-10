@@ -8,7 +8,7 @@ namespace BingApplication
     class BindDataProvider
     {
         public static int autoChangeInterval = 1;
-        private static bool autoChanged = true;
+        private static bool autoChanged = false;
 
         public static bool AutoChanged
         {
