@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <app>
 	<files>
-		<file>setup.exe</file>
+		<string>setup.exe</string>
 	</files>
 	<version>v0.2.2</version>
+	<size>434</size>
 	<info>1. 加入了自动更新检查功能</info>
 </app>
