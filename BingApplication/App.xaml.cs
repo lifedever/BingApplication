@@ -12,6 +12,13 @@ namespace BingApplication
     /// </summary>
     public partial class App : Application
     {
+        [STAThread]
+        public static void Main(string[] args)
+        {
+            SingleInstanceApplicationWrapper wrapper = new SingleInstanceApplicationWrapper();
+            wrapper.Run(args);
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

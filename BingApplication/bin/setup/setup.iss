@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "每日Bing壁纸"
-#define MyAppVersion "0.2.1"
+#define MyAppVersion "0.2.2"
 #define MyAppPublisher "葛方帅"
 #define MyAppURL "http://www.wincn.net/"
 #define MyAppExeName "BingApplication.exe"
@@ -39,6 +39,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Files]
 Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\BingApplication.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\AutoUpdate.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
 [Icons]

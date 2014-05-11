@@ -9,12 +9,12 @@ BingApplication
 none
 false
 DEBUG;TRACE
-F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\App.xaml
-2332850664
+
+3700912780
 
 14125134664
 16-131830410
-MainWindow.xaml;SetupWindow.xaml;
+App.xaml;MainWindow.xaml;SetupWindow.xaml;
 
 False
 

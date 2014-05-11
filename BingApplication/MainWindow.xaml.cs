@@ -42,7 +42,7 @@ namespace BingApplication
 
             InitNotify();
 
-            updateCheck();
+            //updateCheck();
 
 
         }

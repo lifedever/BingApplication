@@ -31,3 +31,4 @@ F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication.Properties.Resources.resources
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication.csproj.GenerateResource.Cache
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\BingApplication_MarkupCompile.lref
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Debug\App.baml
