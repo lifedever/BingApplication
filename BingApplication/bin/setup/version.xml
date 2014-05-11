@@ -6,6 +6,7 @@
 	<version>v0.2.2</version>
 	<size>434</size>
 	<info>
-		1. 加入了自动更新检查功能\n2. 加入声音提醒功能
+		<string>1. 加入了自动更新检查功能</string>
+		<string>2. 加入声音提醒功能</string>
 	</info>
 </app>
