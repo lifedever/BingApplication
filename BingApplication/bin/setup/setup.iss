@@ -39,7 +39,7 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 [Files]
 Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\BingApplication.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\AutoUpdate.exe"; DestDir: "{app}"; Flags: ignoreversion
+; Source: "F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\bin\Release\AutoUpdate.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
 [Icons]
