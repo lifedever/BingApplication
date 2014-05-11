@@ -27,6 +27,7 @@ namespace BingApplication
         }
         public void activate()
         {
+            MainWindow.Visibility = Visibility.Visible;
             MainWindow.Activate();
         }
         private void Application_SessionEnding(object sender, SessionEndingCancelEventArgs e)
