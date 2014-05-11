@@ -16,5 +16,5 @@ TRACE
 16-131830410
 App.xaml;CheckUpdateWindow.xaml;DownloadWindow.xaml;MainWindow.xaml;SetupWindow.xaml;UpdateInfoWindow.xaml;
 
-True
+False
 

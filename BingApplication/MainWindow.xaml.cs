@@ -69,7 +69,7 @@ namespace BingApplication
                     // 将信息转换为对象 
                     versionObj = XmlHelper.XmlDeserailize(versionInfo, typeof(Version)) as Version;
 
-                    if (versionObj.AppVersion.Equals(ConfigUtils.VERSION))
+                    if (!versionObj.AppVersion.Equals(ConfigUtils.VERSION))
                     {
                         // 需要更新
                         if (!auto)
@@ -79,7 +79,7 @@ namespace BingApplication
                         UpdateInfoWindow updateWin = new UpdateInfoWindow();
                         updateWin.Show();
                         List<string> infos = versionObj.AppInfo;
-                        updateWin.textUpdateInfo.Text = string.Format("发现{0}项可用更新！", infos.Count.ToString());
+                        updateWin.textUpdateInfo.Text = string.Format("发现{0}项可用更新！版本号：{1}", infos.Count.ToString(), versionObj.AppVersion);
                         string content = "";
                         foreach (string item in infos)
                         {
