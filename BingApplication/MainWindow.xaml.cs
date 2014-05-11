@@ -18,6 +18,7 @@ using System.Threading;
 using System.Configuration;
 using System.Windows.Threading;
 using System.Windows.Forms;
+using System.Diagnostics;
 namespace BingApplication
 {
     /// <summary>
@@ -31,6 +32,8 @@ namespace BingApplication
 
         private NotifyIcon notifyIcon;
 
+        private Thread updateThread;
+
         public MainWindow()
         {
             
@@ -38,6 +41,27 @@ namespace BingApplication
             this.Title = "每日Bing壁纸" + ConfigUtils.VERSION;
 
             InitNotify();
+
+            updateCheck();
+
+
+        }
+
+        private void updateCheck()
+        {
+            updateThread = new Thread(() =>
+            {
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                    (ThreadStart)delegate()
+                    {
+                        Process process = new Process();
+                        process.StartInfo.FileName = "AutoUpdate.exe";
+                        process.StartInfo.Arguments = "http://git.oschina.net/gefangshuai/BingApplication/raw/master/BingApplication/bin/setup/ "+ConfigUtils.VERSION;
+                        process.Start();
+
+                    });
+            });
+            updateThread.Start();
         }
 
         private void InitNotify()

@@ -5,5 +5,8 @@
 	</files>
 	<version>v0.2.2</version>
 	<size>434</size>
-	<info>1. 加入了自动更新检查功能</info>
+	<info>
+		1. 加入了自动更新检查功能
+		2. 加入声音提醒功能
+	</info>
 </app>
