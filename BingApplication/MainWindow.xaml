@@ -25,6 +25,7 @@
                 <MenuItem Header="选项" Name="menuItemSetup" Click="menuItemSetup_Click"></MenuItem>
             </MenuItem>
             <MenuItem Header="帮助">
+                <MenuItem Header="检查更新" Name="checkUpdate" Click="checkUpdate_Click"></MenuItem>
                 <MenuItem Header="关于" Name="menuItemAbout" Click="menuItemAbout_Click"></MenuItem>
             </MenuItem>
         </Menu>

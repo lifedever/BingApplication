@@ -34,32 +34,78 @@ namespace BingApplication
 
         private Thread updateThread;
 
+        private Version versionObj = null;
+        public Version VersionObj
+        {
+            get { return versionObj; }
+            set { versionObj = value; }
+        }
+
+        public const string remote = "http://git.oschina.net/gefangshuai/BingApplication/raw/master/BingApplication/bin/setup/";
+        private const string VERSION_FILE = "version.xml";
         public MainWindow()
         {
-            
+
             InitializeComponent();
             this.Title = "每日Bing壁纸" + ConfigUtils.VERSION;
 
             InitNotify();
 
-            //updateCheck();
+            updateCheck(true, null);
 
 
         }
 
-        private void updateCheck()
+        private void updateCheck(bool auto, Window win)
         {
+            WebClient client = new WebClient();
             updateThread = new Thread(() =>
             {
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                    (ThreadStart)delegate()
-                    {
-                        Process process = new Process();
-                        process.StartInfo.FileName = "AutoUpdate.exe";
-                        process.StartInfo.Arguments = "http://git.oschina.net/gefangshuai/BingApplication/raw/master/BingApplication/bin/setup/ "+ConfigUtils.VERSION;
-                        process.Start();
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate()
+                {
+                    // 获取版本信息
+                    string versionInfo = Encoding.UTF8.GetString(client.DownloadData(remote + VERSION_FILE));
 
-                    });
+                    // 将信息转换为对象 
+                    versionObj = XmlHelper.XmlDeserailize(versionInfo, typeof(Version)) as Version;
+
+                    if (versionObj.AppVersion.Equals(ConfigUtils.VERSION))
+                    {
+                        // 需要更新
+                        if (!auto)
+                        {
+                            win.Close();
+                        }
+                        UpdateInfoWindow updateWin = new UpdateInfoWindow();
+                        updateWin.Show();
+                        List<string> infos = versionObj.AppInfo;
+                        updateWin.textUpdateInfo.Text = string.Format("发现{0}项可用更新！", infos.Count.ToString());
+                        string content = "";
+                        foreach (string item in infos)
+                        {
+                            if (infos.IndexOf(item) == infos.Count-1)
+                            {
+                                content += item;
+                            }
+                            else
+                            {
+                                content += item + "\n";
+                            }
+                        }
+                        updateWin.groupBoxInfo.Content = content;
+
+
+                    }
+                    else 
+                    {
+                        if (!auto)
+                        {
+                            win.Close();
+                            System.Windows.MessageBox.Show("当前没有可用更新!", "提示", MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                    
+                });
             });
             updateThread.Start();
         }
@@ -80,19 +126,19 @@ namespace BingApplication
 
             //一键壁纸
             System.Windows.Forms.MenuItem oneKeySetup = new System.Windows.Forms.MenuItem("一键壁纸");
-            oneKeySetup.Click += new EventHandler((o, e) => 
+            oneKeySetup.Click += new EventHandler((o, e) =>
             {
                 oneKeySetWallpaper();
             });
             //打开目录
             System.Windows.Forms.MenuItem openImageDir = new System.Windows.Forms.MenuItem("打开目录");
-            openImageDir.Click += new EventHandler((o,e) => 
+            openImageDir.Click += new EventHandler((o, e) =>
             {
                 openDir();
             });
             //退出菜单项
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
-            exit.Click += new EventHandler((o , e) =>
+            exit.Click += new EventHandler((o, e) =>
             {
                 appClose();
             });
@@ -108,10 +154,10 @@ namespace BingApplication
                 exit 
             };
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
-            
+
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler((o, e) =>
             {
-                if (e.Button == MouseButtons.Left) 
+                if (e.Button == MouseButtons.Left)
                 {
                     this.Show();
                 };
@@ -133,9 +179,8 @@ namespace BingApplication
             catch (Exception ee)
             {
                 System.Windows.MessageBox.Show(ee.ToString());
-                //MessageBox.Show("连接失败，请检查您的网络！", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-           
+
         }
 
         private void initializeChangeTimer()
@@ -159,7 +204,7 @@ namespace BingApplication
             string[] files = Directory.GetFiles(ConfigUtils.getStorgePath().Value);
             Random ran = new Random();
 
-            int n = ran.Next(0, files.Length-1);
+            int n = ran.Next(0, files.Length - 1);
             setWallpaper(files[n]);
         }
 
@@ -198,7 +243,7 @@ namespace BingApplication
                 {
                     downloadImage();
                 }
-                if (Boolean.Parse(ConfigUtils.getAutoWallPaper().Value)&&File.Exists(getImageFullPath()))
+                if (Boolean.Parse(ConfigUtils.getAutoWallPaper().Value) && File.Exists(getImageFullPath()))
                 {
                     KeyValueConfigurationElement element = ConfigUtils.getElement(ConfigUtils.WALLPAPER_TIME);
 
@@ -238,7 +283,7 @@ namespace BingApplication
 
         private void getImg_Click(object sender, RoutedEventArgs e)
         {
-            
+
 
         }
 
@@ -277,7 +322,7 @@ namespace BingApplication
         {
             WebClient wc = new WebClient();
             wc.DownloadFile(new Uri(getImageUrl(), UriKind.Absolute), getImageFullPath());
-            notifyTip("提示", "壁纸已下载并保存在"+getImageFullPath(), 2000);
+            notifyTip("提示", "壁纸已下载并保存在" + getImageFullPath(), 2000);
         }
 
 
@@ -293,6 +338,7 @@ namespace BingApplication
         {
 
             this.notifyIcon.Visible = false;
+
             System.Windows.Application.Current.Shutdown();
         }
 
@@ -358,7 +404,7 @@ namespace BingApplication
             e.Cancel = true;
             this.Hide();
             notifyTip("提示", "每日bing壁纸获取程序 已最小化到系统托盘", 2000);
-            
+
         }
 
         private void notifyTip(string title, string text, int timeout)
@@ -382,13 +428,13 @@ namespace BingApplication
             if (result == true)
             {
                 string filename = dlg.FileName;
-                File.Copy(getImageFullPath(),filename);
+                File.Copy(getImageFullPath(), filename);
             }
         }
 
         private void oneKeySetup_Click(object sender, RoutedEventArgs e)
         {
-            oneKeySetWallpaper();    
+            oneKeySetWallpaper();
         }
 
         private void oneKeySetWallpaper()
@@ -403,6 +449,13 @@ namespace BingApplication
 
         private void autoChangeMenu_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void checkUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            CheckUpdateWindow updateWindow = new CheckUpdateWindow();
+            updateWindow.Show();
+            updateCheck(false, updateWindow);
         }
 
 

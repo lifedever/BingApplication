@@ -1,0 +1,33 @@
+﻿<Window x:Class="BingApplication.UpdateInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="更新信息" MinHeight="150" MinWidth="350" Icon="app.ico" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextBlock.VerticalAlignment" Value="Bottom"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">提示：</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Name="textUpdateInfo"></TextBlock>
+        <GroupBox Header="更新内容" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="3" Name="groupBoxInfo">
+            
+        </GroupBox>
+        <Button Grid.Row="6" Grid.Column="1" Name="btnDownload" Click="btnDownload_Click">下载</Button>
+        <Button Grid.Row="6" Grid.Column="3" Name="btnCancel" Click="btnCancel_Click">取消</Button>
+    </Grid>
+</Window>

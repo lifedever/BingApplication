@@ -32,3 +32,9 @@ F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication.csproj.GenerateResource.Cache
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication_MarkupCompile.lref
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\App.baml
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\CheckUpdateWindow.baml
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\DownloadWindow.baml
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\UpdateInfoWindow.baml
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\CheckUpdateWindow.g.cs
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\DownloadWindow.g.cs
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\UpdateInfoWindow.g.cs

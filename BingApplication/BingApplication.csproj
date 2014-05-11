@@ -57,10 +57,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadWindow.xaml.cs">
+      <DependentUpon>DownloadWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateInfoWindow.xaml.cs">
+      <DependentUpon>UpdateInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Version.cs" />
+    <Compile Include="XmlHelper.cs" />
     <Page Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="CheckUpdateWindow.xaml.cs">
+      <DependentUpon>CheckUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ComboInterval.cs" />
     <Compile Include="ConfigUtils.cs" />
     <Compile Include="InverseBooleanConverter.cs" />
@@ -70,6 +81,14 @@
     <Compile Include="SingleInstanceApplicationWrapper.cs" />
     <Compile Include="SystemUtils.cs" />
     <Compile Include="WallpaperUtils.cs" />
+    <Page Include="CheckUpdateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DownloadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -89,6 +108,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SetupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
