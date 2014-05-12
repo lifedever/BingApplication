@@ -26,11 +26,11 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="60"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">壁纸存储路径：</TextBlock>
-                    <TextBox    Grid.Row="2" Grid.Column="0" Width="Auto" Name="textPath" MouseDoubleClick="textPath_MouseDoubleClick"></TextBox>
-                    <Button     Grid.Row="2" Grid.Column="1" Name="selectPath" Click="selectPath_Click">选择路径</Button>
-                    <CheckBox   Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="chkSave">保存当天壁纸到本地</CheckBox>
-                    <CheckBox   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="chkWall" Click="chkWall_Click">自动将当天的壁纸设置成桌面背景</CheckBox>
+                    <TextBlock VerticalAlignment="Bottom"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">壁纸存储路径：</TextBlock>
+                    <TextBox  VerticalAlignment="Bottom"    Grid.Row="2" Grid.Column="0" Width="Auto" Name="textPath" MouseDoubleClick="textPath_MouseDoubleClick"></TextBox>
+                    <Button   VerticalAlignment="Bottom"    Grid.Row="2" Grid.Column="1" Name="selectPath" Click="selectPath_Click">选择路径</Button>
+                    <CheckBox  VerticalAlignment="Bottom"   Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Name="chkSave">保存当天壁纸到本地</CheckBox>
+                    <CheckBox  VerticalAlignment="Bottom"   Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Name="chkWall" Click="chkWall_Click">自动将当天的壁纸设置成桌面背景</CheckBox>
                     <!--<CheckBox Margin="4" Name="chkAutoStart">随Windows登录自动启动</CheckBox>-->
                 </Grid>
             </GroupBox>
@@ -38,16 +38,19 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
-                        <RowDefinition Height="7"></RowDefinition>
+                        <RowDefinition Height="5"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <CheckBox Grid.Row="0" Grid.Column="0" Name="autoChange" >开启自动更换壁纸</CheckBox>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}, Mode=OneWay}">
-                        <TextBlock Grid.Row="2" Grid.Column="2">更换时间间隔：</TextBlock>
-                        <ComboBox Name="combobox"></ComboBox>
+                    <CheckBox VerticalAlignment="Bottom"  Grid.Row="0" Grid.Column="0" Name="autoChange" IsChecked="True">开启自动更换壁纸</CheckBox>
+                    <StackPanel VerticalAlignment="Bottom"  Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Name="intervalPanel" Visibility="{Binding ElementName=autoChange,Path=IsChecked,Converter={StaticResource b2v}, Mode=OneWay}">
+                        <TextBlock VerticalAlignment="Bottom"  >更换时间间隔：</TextBlock>
+                        <ComboBox VerticalAlignment="Bottom"   Name="combobox"></ComboBox>
                     </StackPanel>
+                    <CheckBox VerticalAlignment="Bottom"  Grid.Row="2" IsChecked="True" Name="checkBoxSound"> 开启更换主题音效</CheckBox>
                 </Grid>
             </GroupBox>
             <TextBlock Margin="0 5 0 0">提示：壁纸默认保存在程序所在路径的bing目录</TextBlock>

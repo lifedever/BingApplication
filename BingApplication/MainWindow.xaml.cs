@@ -390,6 +390,7 @@ namespace BingApplication
             ConfigUtils.setProp(setupWin.autoChange.IsChecked.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER);
             ComboInterval interval = setupWin.combobox.SelectedValue as ComboInterval;
             ConfigUtils.setProp(interval.Interval.ToString(), ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
+            ConfigUtils.setProp(setupWin.checkBoxSound.IsChecked.ToString(), ConfigUtils.CHANGE_SOUND);
         }
 
         private void menuItemAbout_Click(object sender, RoutedEventArgs e)

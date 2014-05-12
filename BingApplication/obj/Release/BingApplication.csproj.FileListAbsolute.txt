@@ -38,3 +38,4 @@ F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\CheckUpdateWindow.g.cs
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\DownloadWindow.g.cs
 F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\UpdateInfoWindow.g.cs
+F:\Documents\Visual Studio 2013\Projects\product\BingApplication\BingApplication\obj\Release\BingApplication_Content.g.cs

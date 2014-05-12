@@ -3,9 +3,10 @@
 	<files>
 		<string>setup.exe</string>
 	</files>
-	<version>v0.2.3</version>
+	<version>v0.2.4</version>
 	<size>434</size>
 	<info>
-		<string>1. 程序优化</string>
+		<string>1. 设置界面优化</string>
+		<string>2. 加入更换壁纸音效提示支持</string>
 	</info>
 </app>

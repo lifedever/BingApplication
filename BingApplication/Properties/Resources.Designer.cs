@@ -61,11 +61,11 @@ namespace BingApplication.Properties {
         }
         
         /// <summary>
-        ///   查找类似 true 的本地化字符串。
+        ///   查找类似于 System.IO.MemoryStream 的 System.IO.UnmanagedMemoryStream 类型的本地化资源。
         /// </summary>
-        internal static string chk {
+        internal static System.IO.UnmanagedMemoryStream ding {
             get {
-                return ResourceManager.GetString("chk", resourceCulture);
+                return ResourceManager.GetStream("ding", resourceCulture);
             }
         }
     }

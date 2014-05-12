@@ -12,16 +12,17 @@ namespace BingApplication
     /// </summary>
     class ConfigUtils
     {
-        public const string VERSION = "v0.2.3";
+        public const string VERSION = "v0.2.4";
 
-        public const string STORGE_PATH = "storgePath";
-        public const string AUTO_WALLPAPER = "autoWallPaper";
-        public const string AUTO_STARTUP = "autoStartup";
-        public const string AUTO_SAVE = "autoSave";
-        public const string WARNING_SAVE = "warningSave";
-        public const string WALLPAPER_TIME = "wallpaperTime";
-        public const string AUTO_CHANGE_WALLPAPER = "autoChangeWallPaper";
-        public const string AUTO_CHANGE_WALLPAPER_INTERVAL = "autoChangeWallPaperInterval";
+        public const string STORGE_PATH = "storgePath";     //存储路径
+        public const string AUTO_WALLPAPER = "autoWallPaper";   //自动设置当前壁纸
+        public const string AUTO_STARTUP = "autoStartup";   //自动启动
+        public const string AUTO_SAVE = "autoSave"; //自动保存
+        public const string WARNING_SAVE = "warningSave";   //是否提示
+        public const string WALLPAPER_TIME = "wallpaperTime";   //下载时间
+        public const string AUTO_CHANGE_WALLPAPER = "autoChangeWallPaper";  //自动更换壁纸
+        public const string AUTO_CHANGE_WALLPAPER_INTERVAL = "autoChangeWallPaperInterval"; //自动更换壁纸间隔
+        public const string CHANGE_SOUND = "changeSound";   //更换音效
 
 
         /// <summary>
@@ -79,6 +80,16 @@ namespace BingApplication
             initAutoSave();
             initWarningSave();
             initAutoChangeWallPaper();
+            initChangeSound();
+        }
+
+        private static void initChangeSound()
+        {
+            KeyValueConfigurationElement element = getElement(CHANGE_SOUND);
+            if (element == null)
+            {
+                setProp("True", CHANGE_SOUND);
+            }
         }
 
         private static void initAutoChangeWallPaper()

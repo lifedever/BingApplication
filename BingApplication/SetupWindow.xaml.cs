@@ -65,7 +65,7 @@ namespace BingApplication
             //chkAutoStart.IsChecked = Boolean.Parse(ConfigUtils.getAutoStartup().Value);
             chkSave.IsChecked = Boolean.Parse(ConfigUtils.getAutoSave().Value);
             autoChange.IsChecked = Boolean.Parse(ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER).Value);
-
+            checkBoxSound.IsChecked = Boolean.Parse(ConfigUtils.getElement(ConfigUtils.CHANGE_SOUND).Value);
             KeyValueConfigurationElement e = ConfigUtils.getElement(ConfigUtils.AUTO_CHANGE_WALLPAPER_INTERVAL);
             if (e != null)
             {
