@@ -3,10 +3,9 @@
 	<files>
 		<string>setup.exe</string>
 	</files>
-	<version>v0.2.2</version>
+	<version>v0.2.3</version>
 	<size>434</size>
 	<info>
-		<string>1. 加入了自动更新检查功能</string>
-		<string>2. 加入声音提醒功能</string>
+		<string>1. 程序优化</string>
 	</info>
 </app>

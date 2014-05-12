@@ -12,7 +12,7 @@ namespace BingApplication
     /// </summary>
     class ConfigUtils
     {
-        public const string VERSION = "v0.2.2";
+        public const string VERSION = "v0.2.3";
 
         public const string STORGE_PATH = "storgePath";
         public const string AUTO_WALLPAPER = "autoWallPaper";

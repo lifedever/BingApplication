@@ -136,6 +136,14 @@ namespace BingApplication
             {
                 openDir();
             });
+
+            //设置菜单项
+            System.Windows.Forms.MenuItem setup = new System.Windows.Forms.MenuItem("选项");
+            setup.Click += new EventHandler((o, e) =>
+            {
+                setupClick();
+            });
+
             //退出菜单项
             System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出");
             exit.Click += new EventHandler((o, e) =>
@@ -150,6 +158,8 @@ namespace BingApplication
                 new System.Windows.Forms.MenuItem("-"), 
                 oneKeySetup,
                 openImageDir,
+                new System.Windows.Forms.MenuItem("-"), 
+                setup,
                 new System.Windows.Forms.MenuItem("-"), 
                 exit 
             };
@@ -343,6 +353,11 @@ namespace BingApplication
         }
 
         private void menuItemSetup_Click(object sender, RoutedEventArgs e)
+        {
+            setupClick();
+        }
+
+        private void setupClick()
         {
             SetupWindow setupWin = new SetupWindow();
             setupWin.Owner = this;
