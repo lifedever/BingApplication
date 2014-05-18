@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName "每日Bing壁纸"
-#define MyAppVersion "0.2.4"
+#define MyAppVersion "0.2.5"
 #define MyAppPublisher "葛方帅"
 #define MyAppURL "http://www.wincn.net/"
 #define MyAppExeName "BingApplication.exe"

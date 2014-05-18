@@ -12,6 +12,7 @@ namespace BingApplication
     /// </summary>
     public partial class App : Application
     {
+
         [STAThread]
         public static void Main(string[] args)
         {

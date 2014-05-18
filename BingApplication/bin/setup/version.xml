@@ -3,10 +3,10 @@
 	<files>
 		<string>setup.exe</string>
 	</files>
-	<version>v0.2.4</version>
+	<version>v0.2.5</version>
 	<size>434</size>
 	<info>
-		<string>1. 设置界面优化</string>
-		<string>2. 加入更换壁纸音效提示支持</string>
+		<string>1. 加入离线使用功能，无网络连接时也使用软件的自动更换壁纸功能</string>
+		<string>2. 重新设计关于界面，加入软件源码直达功能</string>
 	</info>
 </app>

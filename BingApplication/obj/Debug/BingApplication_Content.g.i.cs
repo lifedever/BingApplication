@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("1140395.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/wpn.wav")]
 
 

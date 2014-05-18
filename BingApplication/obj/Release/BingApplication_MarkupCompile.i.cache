@@ -10,11 +10,11 @@ none
 false
 TRACE
 
-6-2111546194
+7-1150587623
 1-156801818
-20-106025631
+19-1008064721
 16-131830410
-App.xaml;CheckUpdateWindow.xaml;DownloadWindow.xaml;MainWindow.xaml;SetupWindow.xaml;UpdateInfoWindow.xaml;
+AboutWindow.xaml;App.xaml;CheckUpdateWindow.xaml;DownloadWindow.xaml;MainWindow.xaml;SetupWindow.xaml;UpdateInfoWindow.xaml;
 
-False
+True
 

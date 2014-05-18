@@ -14,25 +14,30 @@ using System.Windows.Shapes;
 namespace BingApplication
 {
     /// <summary>
-    /// UpdateInfoWindow.xaml 的交互逻辑
+    /// AboutWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class UpdateInfoWindow : Window
+    public partial class AboutWindow : Window
     {
-        public UpdateInfoWindow()
+        public AboutWindow()
         {
+
             InitializeComponent();
         }
 
-        private void btnDownload_Click(object sender, RoutedEventArgs e)
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
-            DownloadWindow downloadWin = new DownloadWindow();
-            downloadWin.Show();
+
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void github_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            System.Diagnostics.Process.Start("https://github.com/gefangshuai/BingApplication");
+
+        }
+
+        private void blog_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://wincn.net");
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -40,7 +45,7 @@ namespace BingApplication
             if (e.Key == Key.Escape)
             {
                 Close();
-            }    
+            }
         }
     }
 }

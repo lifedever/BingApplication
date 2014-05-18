@@ -7,7 +7,6 @@ namespace BingApplication
 {
     class ComboInterval
     {
-        private int CARDINAL_NUMBER = 1000 * 60;  //1分钟为单位
         private int interval;
 
 

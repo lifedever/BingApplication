@@ -68,5 +68,14 @@ namespace BingApplication.Properties {
                 return ResourceManager.GetStream("ding", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 0.2.5 的本地化字符串。
+        /// </summary>
+        internal static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
     }
 }

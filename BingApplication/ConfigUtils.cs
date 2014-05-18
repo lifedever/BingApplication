@@ -10,9 +10,9 @@ namespace BingApplication
     /// <summary>
     /// config配置文件工具类
     /// </summary>
-    class ConfigUtils
+    public partial class ConfigUtils
     {
-        public const string VERSION = "v0.2.4";
+        public const string VERSION = "v0.2.5";
 
         public const string STORGE_PATH = "storgePath";     //存储路径
         public const string AUTO_WALLPAPER = "autoWallPaper";   //自动设置当前壁纸

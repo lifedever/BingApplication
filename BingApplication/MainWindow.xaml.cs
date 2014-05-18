@@ -19,6 +19,7 @@ using System.Configuration;
 using System.Windows.Threading;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 namespace BingApplication
 {
     /// <summary>
@@ -35,25 +36,49 @@ namespace BingApplication
         private Thread updateThread;
 
         private Version versionObj = null;
+
         public Version VersionObj
         {
             get { return versionObj; }
             set { versionObj = value; }
         }
 
+        private bool isConnection = false;
+
         public const string remote = "http://git.oschina.net/gefangshuai/BingApplication/raw/master/BingApplication/bin/setup/";
         private const string VERSION_FILE = "version.xml";
+
+        [DllImport("wininet.dll", EntryPoint = "InternetGetConnectedState")]
+        public extern static bool InternetGetConnectedState(out int conState, int reder);
+
         public MainWindow()
         {
-
             InitializeComponent();
             this.Title = "每日Bing壁纸" + ConfigUtils.VERSION;
-
             InitNotify();
 
-            updateCheck(true, null);
+            checkNetwork();
 
+            if (isConnection)
+            {
+                updateCheck(true, null);
+            }
+        }
 
+        private void checkNetwork()
+        {
+           
+            int n = 0;
+            if (InternetGetConnectedState(out n, 0))
+            {
+                isConnection = true;
+            }
+            else
+            {
+                isConnection = false;
+                notifyTip("注意", "您的计算机已处于离线状态，无法获取最新壁纸，请检查网络连接后重启软件", 2000);
+            }
+              
         }
 
         private void updateCheck(bool auto, Window win)
@@ -247,7 +272,7 @@ namespace BingApplication
         private void timer_tick(object sender, EventArgs e)
         {
             bool autoSave = Boolean.Parse(ConfigUtils.getAutoSave().Value);
-            if (autoSave)   //自动保存
+            if (autoSave && isConnection)   //自动保存
             {
                 if (!File.Exists(getImageFullPath()))
                 {
@@ -309,19 +334,31 @@ namespace BingApplication
 
         private void loadImg()
         {
-            if (!File.Exists(getImageFullPath()))
+            if (isConnection)
             {
-                BitmapImage myBitmapImage = new BitmapImage();
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri(getImageUrl(), UriKind.Absolute);
-                myBitmapImage.DecodePixelWidth = 2048;
-                myBitmapImage.EndInit();
-                img.Source = myBitmapImage;
+                if (!File.Exists(getImageFullPath()))
+                {
+                    BitmapImage myBitmapImage = new BitmapImage();
+                    myBitmapImage.BeginInit();
+                    myBitmapImage.UriSource = new Uri(getImageUrl(), UriKind.Absolute);
+                    myBitmapImage.DecodePixelWidth = 2048;
+                    myBitmapImage.EndInit();
+                    img.Source = myBitmapImage;
+                }
+                else
+                {
+                    img.Source = new BitmapImage(new Uri(getImageFullPath(), UriKind.RelativeOrAbsolute));
+                }
             }
             else
             {
-                img.Source = new BitmapImage(new Uri(getImageFullPath(), UriKind.RelativeOrAbsolute));
+                string[] files = Directory.GetFiles(ConfigUtils.getStorgePath().Value);
+                Random ran = new Random();
+
+                int n = ran.Next(0, files.Length - 1);
+                img.Source = new BitmapImage(new Uri(files[n], UriKind.RelativeOrAbsolute));
             }
+            
         }
 
 
@@ -367,11 +404,17 @@ namespace BingApplication
 
             if (!Boolean.Parse(ConfigUtils.getAutoSave().Value))
             {
-                timer.Stop();
+                if (timer != null)
+                {
+                    timer.Stop();
+                }
             }
             else
             {
-                timer.Start();
+                if (timer != null)
+                {
+                    timer.Start();
+                }
             }
 
             initializeChangeTimer();
@@ -395,7 +438,7 @@ namespace BingApplication
 
         private void menuItemAbout_Click(object sender, RoutedEventArgs e)
         {
-            AboutBox1 about = new AboutBox1();
+            AboutWindow about = new AboutWindow();
             about.ShowDialog();
         }
 
@@ -432,19 +475,26 @@ namespace BingApplication
 
         private void menuItemSave_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            //dlg.FileName = "图片"; // Default file name
-            //dlg.DefaultExt = ".jpg"; // Default file extension
-            dlg.Filter = "图片文件|*.jpg"; // Filter files by extension
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process save file dialog box results
-            if (result == true)
+            if (isConnection)
             {
-                string filename = dlg.FileName;
-                File.Copy(getImageFullPath(), filename);
+                Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+                //dlg.FileName = "图片"; // Default file name
+                //dlg.DefaultExt = ".jpg"; // Default file extension
+                dlg.Filter = "图片文件|*.jpg"; // Filter files by extension
+
+                // Show save file dialog box
+                Nullable<bool> result = dlg.ShowDialog();
+
+                // Process save file dialog box results
+                if (result == true)
+                {
+                    string filename = dlg.FileName;
+                    File.Copy(getImageFullPath(), filename);
+                }
+            }
+            else
+            {
+                notifyTip("失败！", "暂无网络连接，请检查您的网络或重启软件！", 2000);
             }
         }
 
@@ -455,12 +505,19 @@ namespace BingApplication
 
         private void oneKeySetWallpaper()
         {
-            if (!File.Exists(getImageFullPath()))
+            if (isConnection)
             {
-                downloadImage();
+                if (!File.Exists(getImageFullPath()))
+                {
+                    downloadImage();
+                }
+                WallpaperUtils.setWallpaper(getImageFullPath());
+                notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
             }
-            WallpaperUtils.setWallpaper(getImageFullPath());
-            notifyTip("恭喜！", "已更换新的桌面壁纸！", 2000);
+            else
+            {
+                notifyTip("失败！", "暂无网络连接，请检查您的网络或重启软件！", 2000);
+            }
         }
 
         private void autoChangeMenu_Click(object sender, RoutedEventArgs e)
@@ -469,9 +526,16 @@ namespace BingApplication
 
         private void checkUpdate_Click(object sender, RoutedEventArgs e)
         {
-            CheckUpdateWindow updateWindow = new CheckUpdateWindow();
-            updateWindow.Show();
-            updateCheck(false, updateWindow);
+            if (isConnection)
+            {
+                CheckUpdateWindow updateWindow = new CheckUpdateWindow();
+                updateWindow.Show();
+                updateCheck(false, updateWindow);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("请检查网络连接或重启软件！", "提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
 
